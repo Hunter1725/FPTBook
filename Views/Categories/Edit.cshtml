@@ -42,8 +42,10 @@
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input class="btn btn-success" type="submit" asp-for="Status" name="Status" id="Status" value="Approve"></input>
+                    <a asp-action="Index"type="button" class="btn btn-warning" >Back to List</a> |
+                    <input class="btn btn-success" type="submit" asp-for="Status" name="Status" id="Status" value="Approve"></input> |
                     <input class="btn btn-danger" type="submit" asp-for="Status" name="Status" id="Status" value="Reject"></input>
+                    
                 </div>
             </form>
         </div>
@@ -78,10 +80,6 @@
         </form>
         </div>
         </div> *@
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
 </div>
 @section Scripts {
 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

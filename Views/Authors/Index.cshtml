@@ -41,8 +41,7 @@
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
-                    Edit &ensp; &ensp;&ensp; Details &ensp; &ensp; &ensp; Delete
-
+                    &ensp;Edit &ensp;&ensp; Details &ensp;  Delete
                 </th>
             </tr>
         </thead>
@@ -57,15 +56,9 @@
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id"><span class="material-symbols-outlined">
-                                edit |
-                            </span></a>
-                        <a asp-action="Details" asp-route-id="@item.Id"><span class="material-symbols-outlined">
-                                &nbsp;visibility |
-                            </span></a>
-                        <a asp-action="Delete" asp-route-id="@item.Id"><span class="material-symbols-outlined">
-                                &nbsp;delete
-                            </span></a>
+                        <a asp-action="Edit" asp-route-id="@item.Id"><button type="button" class="btn btn-success"><span class="material-symbols-outlined" > edit</span></button></a> |
+                        <a asp-action="Details" asp-route-id="@item.Id"><button type="button" class="btn btn-info"><span class="material-symbols-outlined">visibility</span></button></a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger"><span class="material-symbols-outlined">delete</span></button></a>
                     </td>
                 </tr>
             }
