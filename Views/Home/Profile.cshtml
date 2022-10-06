@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Profile";
+}
+<section class="bg0 p-t-100 p-b-80">
+    <div class="container">
+        <div class="row p-b-20">
+            <!-- Shoping Cart -->
+            <form class="bg0 p-t-20 p-b-85 col-sm-12 col-lg-12 col-xl-12 m-lr-auto">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-12 col-xl-12 m-lr-auto">
+                            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-20 m-r-20 m-lr-0-xl p-lr-15-sm">
+                                <div class="flex-w flex-t p-b-13">
+                                    <div class="size-208">
+                                        <h4 class="mtext-109 cl2 p-b-30">
+                                            Your Profile
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="fullname"><strong>Fullname</strong></label>
+                                    <input type="text" id="fullname" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="address"><strong>Home Address</strong></label>
+                                    <input type="text" id="address" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="email"><strong>Email</strong></label>
+                                    <input type="email" id="email" class="form-control form-control-lg" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="passowrd"><strong>Password</strong></label>
+                                    <input type="password" id="passowrd" class="form-control form-control-lg" />
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="repassowrd"><strong>Re-Password</strong></label>
+                                    <input type="password" id="repassowrd" class="form-control form-control-lg" />
+                                </div>
+                                <div class="row">
+                                    <button
+                                        class="flex-c-m stext-101 cl0 m-r-20 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer">
+                                        Update
+                                    </button>
+                                    <button
+                                        class="flex-c-m stext-101 cl0 m-r-20 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer">
+                                        Cancel
+                                    </button>
+                                    <button
+                                        class="flex-c-m stext-101 cl0 size-101 btn-danger bor14 hov-btn3 p-lr-5 trans-04 pointer">
+                                        Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-12 col-xl-12 m-lr-auto m-b-50">
+                <div class="m-l-20 m-r-20 m-lr-0-xl">
+                    <div class="flex-w flex-t p-b-13">
+                        <div class="size-208">
+                            <h4 class="mtext-109 cl2 p-b-30">
+                                Order records
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="wrap-table-shopping-cart">
+                        <table class="table-shopping-cart">
+                            <tr class="table_head text-center">
+                                <th class="column-1 ">ID</th>
+                                <th class="column-2">Date</th>
+                                <th class="column-3">Delivery Date</th>
+                                <th class="column-4">Address</th>
+                                <th class="column-5">Book</th>
+                                <th class="column-6">Quantity</th>
+                                <th class="column-7">Status</th>
+                                <th class="column-8">Total</th>
+                            </tr>
+
+                            <tr class="table_row">
+                                <td class="column-1">
+                                    1
+                                </td>
+                                <td class="column-2">20/09/2022</td>
+                                <td class="column-3">30/09/2022</td>
+                                <td class="column-4">Can Tho City</td>
+                                <td class="column-5">Victory</td>
+                                <td class="column-6">
+                                    12
+                                </td>
+                                <td class="column-7">Delivering</td>
+                                <td class="column-8">$46</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

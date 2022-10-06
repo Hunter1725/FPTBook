@@ -1,0 +1,58 @@
+@model IEnumerable<FPTBook.Models.Category>
+
+@{
+    ViewData["Title"] = "Index Category";
+    Layout = "_StoreOwnerLayout";
+}
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class=""><a href="/Books/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Book</a></li>
+
+            <li class=""><a href="/Authors/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Author</a></li>
+
+            <li class=""><a href="/Publishers/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Publishsher</a></li>
+
+            <li class=""><a href="//Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Order</a></li>
+
+            <li class="active"><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request Category</a></li>
+            <br><br><br><br><br><br><br><br>
+
+            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <h2>Make a request to add a New Category </h2>
+    <br>
+    <p>
+        <a asp-action="Create" class="btn btn-primary" >Make Request</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
