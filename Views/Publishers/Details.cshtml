@@ -1,0 +1,54 @@
+@model FPTBook.Models.Publisher
+
+@{
+    ViewData["Title"] = "Details Publisher";
+    Layout = "_StoreOwnerLayout";
+}
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class=""><a href="/Books/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Book</a></li>
+
+            <li class=""><a href="/Authors/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Author</a></li>
+
+            <li class="active"><a href="/Publishers/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage
+                    Publishsher</a></li>
+
+            <li class=""><a href="//Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Order</a></li>
+
+            <li class=""><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request Category</a>
+            </li>
+            <br><br><br><br><br><br><br><br>
+
+            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+    <h2>Publishers Details</h2>
+    <hr>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id"><span class="material-symbols-outlined">
+                &ensp; &ensp; &ensp; &ensp; edit
+            </span></a>
+    </div>
+</div>
