@@ -23,9 +23,20 @@ namespace FPTBook.Controllers
         }
 
         // GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            var fPTBookContext = _context.Book.Include(b => b.Author).Include(b => b.Category).Include(b => b.Publisher);
+            // var fPTBookContext = _context.Book.Include(b => b.Author).Include(b => b.Category).Include(b => b.Publisher);
+            // return View(await fPTBookContext.ToListAsync());
+            var fPTBookContext = from m in _context.Book.Include(a => a.Category)
+                                                    .Include(b => b.Author)
+                                                    .Include(c => c.Publisher)
+                                                    select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                fPTBookContext = fPTBookContext.Where(s => s.Title!.Contains(searchString));
+            }
+
             return View(await fPTBookContext.ToListAsync());
         }
 

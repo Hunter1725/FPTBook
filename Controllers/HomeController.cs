@@ -32,32 +32,43 @@ public class HomeController : Controller
     // }
 
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string searchString)
     {
-        var fPTBookContext = _context.Book.Include(b => b.Category);
+        // var fPTBookContext = _context.Book.Include(b => b.Category);
+        // return View(await fPTBookContext.ToListAsync());
+        var fPTBookContext = from m in _context.Book.Include(a => a.Category)
+                                                    .Include(b => b.Author)
+                                                    .Include(c => c.Publisher)
+                                                                select m;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            fPTBookContext = fPTBookContext.Where(s => s.Title!.Contains(searchString));
+        }
+
         return View(await fPTBookContext.ToListAsync());
     }
 
 
     public async Task<IActionResult> Detail(int? id)
+    {
+        if (id == null || _context.Book == null)
         {
-            if (id == null || _context.Book == null)
-            {
-                return NotFound();
-            }
-
-            var book = await _context.Book
-                .Include(b => b.Category)
-                .Include(b => b.Author)
-                .Include(b => b.Publisher)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return View(book);
+            return NotFound();
         }
+
+        var book = await _context.Book
+            .Include(b => b.Category)
+            .Include(b => b.Author)
+            .Include(b => b.Publisher)
+            .FirstOrDefaultAsync(m => m.Id == id);
+        if (book == null)
+        {
+            return NotFound();
+        }
+
+        return View(book);
+    }
 
     public IActionResult Help()
     {
