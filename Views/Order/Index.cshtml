@@ -1,0 +1,90 @@
+@model IEnumerable<FPTBook.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_StoreOwnerLayout";
+}
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class=""><a href="/Books/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Book</a></li>
+
+            <li class=""><a href="/Authors/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Author</a></li>
+
+            <li class=""><a href="/Publishers/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Publishsher</a></li>
+
+            <li class="active"><a href="/Order/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Order</a></li>
+
+            <li class=""><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request
+                    Category</a>
+            </li>
+            <br><br><br><br><br><br><br><br>
+
+            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+    <h2>Order Information</h2>
+    <hr>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fullname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                     Detail &ensp;&ensp; Status
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fullname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        <a asp-action="OrderDetail" asp-route-id="@item.Id"><button type="button" class="btn btn-info"><span
+                                class="material-symbols-outlined">visibility</span></button></a> |
+                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><span class="material-symbols-outlined">edit_note</span></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

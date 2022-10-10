@@ -1,0 +1,111 @@
+@{
+    ViewData["Title"] = "Report Demo";
+Layout = "_AdminLayout";
+}
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class=""><a href="/Users/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage User</a></li>
+            <li class=""><a href="/Categories/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Category</a></li>
+            <li class="active"><a href="/Users/ReportDemo"><em class="fa fa-dashboard">&nbsp;</em> Report</a></li>
+            <br><br><br><br><br><br><br><br>
+
+            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <h2>Statistical of Store</h2>
+    
+    <hr>
+    <p>
+                <a asp-action="ExportBookList" type="button"class="btn btn-success">Export Report</a>
+
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titles</th>
+                <th>Total Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (
+            var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.TotalQuantity</td>
+                    <td>@item.Total</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <div>
+        <canvas id="myChart2"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div>
+        <script>
+            const labels = [@Html.Raw(ViewData["labels"])];
+
+
+            const data1 = {
+                labels: labels,
+                datasets: [{
+                    label: 'Book',
+                    backgroundColor: 'rgb(0,0,255)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [@ViewData["totals"]],
+                }]
+            };
+
+            const data2 = {
+                labels: labels,
+                datasets: [{
+                    label: 'Book',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(0,0,255)',
+                    data: [@ViewData["totals"]],
+                }]
+            };
+
+            const config1 = {
+                type: 'bar',
+                data: data1,
+                options: {}
+            };
+            const config2 = {
+                type: 'line',
+                data: data2,
+                options: {
+                    Animation: {
+                        onComplete: function () {
+                            loadImage();
+                        }
+                    }
+                }
+            };
+
+            const myChart1 = new Chart(
+                document.getElementById('myChart1'),
+                config1
+            );
+            const myChart2 = new Chart(
+                document.getElementById('myChart2'),
+                config2
+            );
+            function loadImage() {
+                var myImage = myChart2.toBase64Image();
+                document.getElementById("chartImg").scr = myImage;
+            }
+        </script>
+    </div>
+    
+</div>

@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 namespace FPTBook.Models;
+using System.ComponentModel.DataAnnotations;
 public class OrderItem
 {
         public int Id { get; set; }       
