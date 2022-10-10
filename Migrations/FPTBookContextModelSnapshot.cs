@@ -104,6 +104,67 @@ namespace FPTBook.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("FPTBook.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("FPTBook.Models.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("OrderID");
+
+                    b.ToTable("OrderItem");
+                });
+
             modelBuilder.Entity("FPTBook.Models.Publisher", b =>
                 {
                     b.Property<int>("Id")
@@ -125,7 +186,7 @@ namespace FPTBook.Migrations
                     b.ToTable("Publisher");
                 });
 
-            modelBuilder.Entity("MvcBook.Models.User", b =>
+            modelBuilder.Entity("FPTBook.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,6 +242,25 @@ namespace FPTBook.Migrations
                     b.Navigation("Publisher");
                 });
 
+            modelBuilder.Entity("FPTBook.Models.OrderItem", b =>
+                {
+                    b.HasOne("FPTBook.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FPTBook.Models.Order", "Order")
+                        .WithMany("OrderItem")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("FPTBook.Models.Author", b =>
                 {
                     b.Navigation("Books");
@@ -189,6 +269,11 @@ namespace FPTBook.Migrations
             modelBuilder.Entity("FPTBook.Models.Category", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("FPTBook.Models.Order", b =>
+                {
+                    b.Navigation("OrderItem");
                 });
 
             modelBuilder.Entity("FPTBook.Models.Publisher", b =>

@@ -1,11 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
+using FPTBook.Utils;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FPTBookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FPTBookContext") ?? throw new InvalidOperationException("Connection string 'FPTBookContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".BookTicket.Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(300);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -21,6 +31,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 

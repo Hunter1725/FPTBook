@@ -1,0 +1,133 @@
+@using FPTBook.Utils
+@{
+    ViewData["Title"] = "Shopping Cart";
+    List<CartItem> myItems = (List<CartItem>)ViewData["myItems"];
+    decimal total = 0;
+}
+<section class="bg0 p-t-100 p-b-80">
+    <div class="container">
+        <div class="row p-b-20">
+            <!-- Shoping Cart -->
+            <div class="bg0 p-t-20 p-b-85">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-xl-12 m-lr-auto m-b-50">
+                            <div class="m-l-20 m-r-20 m-lr-0-xl">
+                                <div class="wrap-table-shopping-cart">
+                                    <table class="table-shopping-cart">
+                                        <tr class="table_head text-center">
+                                            <th class="column-1">Book</th>
+                                            <th class="column-2">Title</th>
+                                            <th class="column-3">Author</th>
+                                            <th class="column-4">Price</th>
+                                            <th class="column-5">Quantity</th>
+                                            <th class="column-6">Total</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        @foreach (var item in myItems)
+                                        {
+                                            total += item.Price * item.Quantity;
+                                            <tr class="table_row">
+                                                <form asp-action="EditOrder" method="post">
+                                                    <td class="column-1">
+                                                        <div class="how-itemcart1">
+                                                            <img src="~/uploads/@item.Poster" alt="IMG">
+                                                        </div>
+                                                    </td>
+                                                    <td class="column-2">@item.Title</td>
+                                                    <td class="column-3">@item.Author</td>
+                                                    <td class="column-4">$@item.Price</td>
+                                                    <td class="column-5" align="center">
+                                                        <div class="wrap-num-product flex-w">
+                                                            <div
+                                                            class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                                            </div>
+                                                            <input class="mtext-104 cl3 txt-center num-product"
+                                                            type="number" min="0" name="quantity"
+                                                            value="@item.Quantity" />
+                                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="column-6">$@(item.Price*item.Quantity)</td>
+                                                    <td>
+                                                        <input type="hidden" name="id" value="@item.ID" />
+                                                        <input
+                                                        class="flex-c-m stext-101 cl2 size-105 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                                                        type="submit" value="Update" class="btn btn-primary" />
+                                                    </td>
+                                                </form>
+                                                <td>
+                                                    <form asp-action="RemoveOrderItem" method="post">
+                                                        <input type="hidden" name="id" value="@item.ID" />
+                                                        <input
+                                                        class="flex-c-m stext-101 cl2 size-105 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                                                        type="submit" value="Remove" class="btn btn-danger" />
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-lg-12 col-xl-12 m-lr-auto">
+                            <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-20 m-r-20 m-lr-0-xl p-lr-15-sm">
+                                <div class="flex-w flex-t p-b-13">
+                                    <div class="size-208">
+                                        <h4 class="mtext-109 cl2 p-b-30">
+                                            Cart Totals
+                                        </h4>
+                                    </div>
+
+                                    <div class="size-208">
+                                        <span class="mtext-110 cl2">
+                                            $@total
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                                    <div class="card-body p-5">
+
+                                        <h3 class="mb-4">Payment</h3>
+                                        <form asp-action="PlaceOrder" method="post">
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label"
+                                                    for="fullname"><strong>Fullname</strong></label>
+                                                <input type="text" name="fullname" class="form-control form-control-lg" />
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label" for="address"><strong>Address</strong></label>
+                                                <input type="text" name="address" class="form-control form-control-lg" />
+                                            </div>
+
+                                            <div class="form-outline mb-4">
+                                                <label class="form-label" for="phone"><strong>Phone</strong></label>
+                                                <input type="text" name="phone" class="form-control form-control-lg" />
+                                            </div>
+                                            <div class="row">
+                                                <input type="hidden" name="total" value="@total" />
+                                                <input
+                                                    class="flex-c-m stext-101 cl0 m-r-20 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer"
+                                                    type="submit" value="Order" class="btn btn-primary" />
+
+                                                <a asp-action="Index"
+                                                    class="flex-c-m stext-101 cl0 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer">
+                                                    Cancel
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

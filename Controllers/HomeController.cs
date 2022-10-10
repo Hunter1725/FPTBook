@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FPTBook.Models;
+using Microsoft.AspNetCore.Hosting;
+using FPTBook.Utils;
 
 namespace FPTBook.Controllers;
 
@@ -39,7 +39,7 @@ public class HomeController : Controller
         var fPTBookContext = from m in _context.Book.Include(a => a.Category)
                                                     .Include(b => b.Author)
                                                     .Include(c => c.Publisher)
-                                                                select m;
+                             select m;
 
         if (!String.IsNullOrEmpty(searchString))
         {
@@ -104,5 +104,76 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+    [HttpPost]
+    public IActionResult AddBook(int id, string name, string poster, string author, decimal price, int quantity)
+    {
+        ShoppingCart myCart;
+        // If the cart is not in the session, create one and put it there
+        // Otherwise, get it from the session
+        if (HttpContext.Session.GetObject<ShoppingCart>("cart") == null)
+        {
+            myCart = new ShoppingCart();
+            HttpContext.Session.SetObject("cart", myCart);
+        }
+        myCart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        var newItem = myCart.AddItem(id, name, poster, author, price, quantity);
+        HttpContext.Session.SetObject("cart", myCart);
+        ViewData["newItem"] = newItem;
+        return View();
+    }
+
+    public IActionResult CheckOut()
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        ViewData["myItems"] = cart.Items;
+        return View();
+    }
+
+    public IActionResult PlaceOrder(decimal total, string fullname, string address, string phone)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        Order myOrder = new Order();
+        myOrder.OrderTime = DateTime.Now;
+        myOrder.Total = total;
+        myOrder.Fullname = fullname;
+        myOrder.Address = address;
+        myOrder.Phone = phone;
+        myOrder.State = "Delivering";
+        _context.Order.Add(myOrder);
+        _context.SaveChanges();//this generates the Id for Order
+
+        foreach (var item in cart.Items)
+        {
+            OrderItem myOrderItem = new OrderItem();
+            myOrderItem.BookID = item.ID;
+            myOrderItem.Quantity = item.Quantity;
+            myOrderItem.OrderID = myOrder.Id;//id of saved order above
+
+            _context.OrderItem.Add(myOrderItem);
+        }
+        _context.SaveChanges();
+        //empty shopping cart
+        cart = new ShoppingCart();
+        HttpContext.Session.SetObject("cart", cart);
+        return View();
+    }
+    [HttpPost]
+    public RedirectToActionResult EditOrder(int id, int quantity)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        cart.EditItem(id, quantity);
+        HttpContext.Session.SetObject("cart", cart);
+
+        return RedirectToAction("CheckOut", "Home");
+    }
+    [HttpPost]
+    public RedirectToActionResult RemoveOrderItem(int id)
+    {
+        ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        cart.RemoveItem(id);
+        HttpContext.Session.SetObject("cart", cart);
+
+        return RedirectToAction("CheckOut", "Home");
     }
 }

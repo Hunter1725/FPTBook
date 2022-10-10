@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using FPTBook.Models;
+using FPTBook.Utils;
 
 namespace FPTBook.Controllers
 {

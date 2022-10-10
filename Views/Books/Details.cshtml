@@ -16,7 +16,8 @@
 
             <li class=""><a href="//Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Order</a></li>
 
-            <li class=""><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request Category</a>
+            <li class=""><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request
+                    Category</a>
             </li>
             <br><br><br><br><br><br><br><br>
 
@@ -83,7 +84,16 @@
         </dl>
     </div>
     <div>
-        <a asp-action="Index"type="button" class="btn btn-warning" >Back to List</a> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-        <a asp-action="Edit" asp-route-id="@Model.Id"><button type="button" class="btn btn-success"><span class="material-symbols-outlined" > edit</span></button></a>
+        <a asp-action="Index" type="button" class="btn btn-warning">Back to List</a>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <a asp-action="Edit" asp-route-id="@Model.Id"><button type="button" class="btn btn-success"><span
+                    class="material-symbols-outlined"> edit</span></button></a>
+        <form asp-action="AddBook" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" name="name" value="@Model.Title" />
+            <input type="hidden" name="price" value="@Model.Price" />
+            <input type="number" name="quantity" min=1 value=1 />
+            <input type="submit" value="Add To Cart" class="btn btn-primary" />
+        </form>
     </div>
 </div>
