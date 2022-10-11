@@ -1,4 +1,4 @@
-@model IEnumerable<FPTBook.Models.Order>
+@model IEnumerable<FPTBook.Models.OrderItem>
 
 @{
     ViewData["Title"] = "Index";
@@ -33,58 +33,57 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.OrderTime)
+                    Order ID
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Total)
+                    Book ID
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.State)
+                    Title
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Fullname)
+                    Author
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    Price
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Phone)
+                    Quantity
                 </th>
                 <th>
-                     Detail &ensp;&ensp; Status
+                    Total
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
+
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OrderTime)
+                        @Html.DisplayFor(modelItem => item.Order.Id)
                     </td>
                     <td>
-                        $@Html.DisplayFor(modelItem => item.Total)
+                        @Html.DisplayFor(modelItem => item.Book.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.State)
+                        @Html.DisplayFor(modelItem => item.Book.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Fullname)
+                        @Html.DisplayFor(modelItem => item.Book.Author.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Address)
+                        $@Html.DisplayFor(modelItem => item.Book.Price)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
+                        @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
                     <td>
-                        <a asp-action="OrderDetail" asp-route-id="@item.Id"><button type="button" class="btn btn-info"><span
-                                class="material-symbols-outlined">visibility</span></button></a> |
-                        <a class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id"><span class="material-symbols-outlined">edit_note</span></a>
-
+                        $@(item.Quantity*item.Book.Price)
                     </td>
                 </tr>
             }
         </tbody>
+        <a asp-action="Index"type="button" class="btn btn-warning" >Back to List</a>
     </table>
 </div>

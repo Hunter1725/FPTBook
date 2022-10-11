@@ -126,8 +126,15 @@ public class HomeController : Controller
     public IActionResult CheckOut()
     {
         ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
-        ViewData["myItems"] = cart.Items;
-        return View();
+        if (cart != null)
+        {
+            ViewData["myItems"] = cart.Items;
+            return View();
+        }
+        else
+        {
+            return View("EmptyCart");
+        }
     }
 
     public IActionResult PlaceOrder(decimal total, string fullname, string address, string phone)

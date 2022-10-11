@@ -79,7 +79,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Price)
+                $@Html.DisplayFor(model => model.Price)
             </dd>
         </dl>
     </div>
@@ -88,12 +88,5 @@
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
         <a asp-action="Edit" asp-route-id="@Model.Id"><button type="button" class="btn btn-success"><span
                     class="material-symbols-outlined"> edit</span></button></a>
-        <form asp-action="AddBook" method="post">
-            <input type="hidden" name="id" value="@Model.Id" />
-            <input type="hidden" name="name" value="@Model.Title" />
-            <input type="hidden" name="price" value="@Model.Price" />
-            <input type="number" name="quantity" min=1 value=1 />
-            <input type="submit" value="Add To Cart" class="btn btn-primary" />
-        </form>
     </div>
 </div>

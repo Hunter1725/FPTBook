@@ -884,3 +884,11 @@ C:\Users\nguye\Desktop\University\1670 Application Development\FPTBook\bin\Debug
 C:\Users\nguye\Desktop\University\1670 Application Development\FPTBook\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\nguye\Desktop\University\1670 Application Development\FPTBook\bin\Debug\net6.0\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
 C:\Users\nguye\Desktop\University\1670 Application Development\FPTBook\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\EPPlus.Core.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\System.Xml.XPath.XmlDocument.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll
