@@ -8,16 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using FPTBook.Models;
 using FPTBook.Utils;
+using FPTBook.Areas.Identity.Data;
 
 namespace FPTBook.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly FPTBookContext _context;
+        private readonly FPTBookIdentityDbContext _context;
 
         private readonly IWebHostEnvironment hostEnvironment;
 
-        public BooksController(FPTBookContext context, IWebHostEnvironment environment)
+        public BooksController(FPTBookIdentityDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
             hostEnvironment = environment;

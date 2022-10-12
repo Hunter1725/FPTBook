@@ -9,14 +9,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using FPTBook.Utils;
+using FPTBook.Areas.Identity.Data;
 
 namespace FPTBook.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly FPTBookContext _context;
+    private readonly FPTBookIdentityDbContext _context;
 
-    public HomeController(FPTBookContext context)
+    public HomeController(FPTBookIdentityDbContext context)
     {
         _context = context;
     }

@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTBook.Models;
+using FPTBook.Areas.Identity.Data;
 
 namespace FPTBook.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly FPTBookContext _context;
+        private readonly FPTBookIdentityDbContext _context;
 
-        public OrderController(FPTBookContext context)
+        public OrderController(FPTBookIdentityDbContext context)
         {
             _context = context;
         }

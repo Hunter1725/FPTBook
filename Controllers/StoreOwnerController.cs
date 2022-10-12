@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using FPTBook.Models;
+using FPTBook.Areas.Identity.Data;
 
 namespace FPTBook.Controllers;
 

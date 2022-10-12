@@ -1,0 +1,69 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_MyLayout";
+}
+
+<section class="vh-100 p-t-120 p-b-40">
+    <div class="container py-5 h-100">
+        <section>
+            <h2 class="text-center mb-2 pb-2 text-body fw-bold"><strong>Are you ready to enter the land of
+                    knowledge?</strong></h2>
+            <p class="text-center mb-4" style="font-size: 20px">
+                According to educational news, reading is the most effective and practical self-study method that anyone
+                can do. Cultivating the habit of reading books will bring great benefits; is a good habit that helps our
+                brain stay healthy and flexible and many other benefits
+            </p>
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-14 col-md-10 col-lg-6 col-xl-7">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5">
+
+                            <h3 class="mb-4 text-center">Sign up</h3>
+                            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <h2>Create a new account.</h2>
+                                <hr />
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Input.Name" class="form-control" />
+                                    <label asp-for="Input.Name"></label>
+                                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Input.Address" class="form-control" />
+                                    <label asp-for="Input.Address"></label>
+                                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Input.Email" class="form-control" autocomplete="username"
+                                        aria-required="true" />
+                                    <label asp-for="Input.Email"></label>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Input.Password" class="form-control" autocomplete="new-password"
+                                        aria-required="true" />
+                                    <label asp-for="Input.Password"></label>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <input asp-for="Input.ConfirmPassword" class="form-control"
+                                        autocomplete="new-password" aria-required="true" />
+                                    <label asp-for="Input.ConfirmPassword"></label>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <button id="registerSubmit" type="submit"
+                                    class="w-100 btn btn-lg btn-dark">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </div>
+</section>
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

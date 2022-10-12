@@ -2,9 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using FPTBook.Utils;
+using Microsoft.AspNetCore.Identity;
+using FPTBook.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<FPTBookContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FPTBookContext") ?? throw new InvalidOperationException("Connection string 'FPTBookContext' not found.")));
+builder.Services.AddDbContext<FPTBookIdentityDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FPTBookIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'FPTBookIdentityDbContextConnection' not found.")));
+
+builder.Services.AddDefaultIdentity<BookUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<FPTBookIdentityDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,11 +37,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();

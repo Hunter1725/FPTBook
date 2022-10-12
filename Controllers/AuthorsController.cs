@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTBook.Models;
+using FPTBook.Areas.Identity.Data;
 
 namespace FPTBook.Controllers
 {
     public class AuthorsController : Controller
     {
-        private readonly FPTBookContext _context;
+        private readonly FPTBookIdentityDbContext _context;
 
-        public AuthorsController(FPTBookContext context)
+        public AuthorsController(FPTBookIdentityDbContext context)
         {
             _context = context;
         }
