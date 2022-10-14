@@ -2490,6 +2490,7 @@ input.num-product::-webkit-inner-spin-button {
     font-family: Poppins-Regular;
     font-size: 28px;
     line-height: 1.2857;
+    color: white;
 }
 
 .ltext-102 {
@@ -2550,6 +2551,7 @@ input.num-product::-webkit-inner-spin-button {
     font-size: 60px;
     line-height: 1.1;
     text-transform: uppercase;
+    color: white;
 }
 
 .ltext-202 {
