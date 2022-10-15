@@ -58,6 +58,11 @@ namespace FPTBook.Areas.Identity.Pages.Account.Manage
             public string Name { get; set; }
 
             [Required]
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.DateTime)]    
+            public DateTime DOB { get; set; }
+
+            [Required]
             [Display(Name = "Home Address")]
             [DataType(DataType.Text)]
             public string Address { get; set; }
@@ -121,6 +126,11 @@ namespace FPTBook.Areas.Identity.Pages.Account.Manage
             if (Input.Name != user.Name)
             {
                 user.Name = Input.Name;
+            }
+
+            if (Input.DOB != user.DOB)
+            {
+                user.DOB = Input.DOB;
             }
 
             if (Input.Address != user.Address)

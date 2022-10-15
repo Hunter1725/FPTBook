@@ -13,6 +13,11 @@ public class BookUser : IdentityUser
     public string  Name { get; set; }
 
     [PersonalData]
+    public DateTime  DOB { get; set; }
+
+    [PersonalData]
     public string  Address { get; set; }
+
+
 }
 

@@ -77,6 +77,11 @@ namespace FPTBook.Areas.Identity.Pages.Account
             public string Name { get; set; }
 
             [Required]
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.DateTime)]
+            public DateTime DOB { get; set; }
+
+            [Required]
             [Display(Name = "Home Address")]
             [DataType(DataType.Text)]
             public string Address { get; set; }
@@ -166,6 +171,7 @@ namespace FPTBook.Areas.Identity.Pages.Account
             {
                 BookUser user = Activator.CreateInstance<BookUser>();
                 user.Name = Input.Name;
+                user.DOB = Input.DOB;
                 user.Address = Input.Address;
                 return user;
             }
