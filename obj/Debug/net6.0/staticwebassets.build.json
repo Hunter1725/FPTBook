@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "my9mW74uZpVeH1k3w26O/MYIlpv7sn94uIn7E/zgJbc=",
+  "Hash": "bo+HiGivl3lj5qc5YoWyE2D7y0glpG3Df6MbISr+z7Q=",
   "Source": "FPTBook",
   "BasePath": "_content/FPTBook",
   "Mode": "Default",
@@ -6339,6 +6339,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\product-detail-02.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\nguye\\Desktop\\FPTBook\\wwwroot\\uploads\\ROG Strix 2019_1920x1080.png",
+      "SourceId": "FPTBook",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\nguye\\Desktop\\FPTBook\\wwwroot\\",
+      "BasePath": "_content/FPTBook",
+      "RelativePath": "uploads/ROG Strix 2019_1920x1080.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\ROG Strix 2019_1920x1080.png"
     },
     {
       "Identity": "C:\\Users\\nguye\\Desktop\\FPTBook\\wwwroot\\uploads\\ROG_wallpaper-Laputu_3840x2160.jpg",

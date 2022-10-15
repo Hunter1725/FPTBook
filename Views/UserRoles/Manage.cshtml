@@ -1,0 +1,51 @@
+@model List<ManageUserRolesViewModel>
+@{
+    ViewData["Title"] = "Manage";
+    Layout = "_AdminLayout";
+}
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <ul class="nav menu">
+            <li class="active"><a href="/UserRoles/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage User</a></li>
+
+            <li class=""><a href="/RoleManager/Index"><em class="fa fa-dashboard">&nbsp;</em> Add Role</a></li>
+
+            <li class=""><a href="/Categories/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Category</a></li> 
+
+            <li class=""><a href="/Admin/ReportDemo"><em class="fa fa-dashboard">&nbsp;</em> Report</a></li>
+            <br><br><br><br><br><br><br><br>
+
+            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+    <form method="post">
+        <div class="card">
+            <div class="card-header">
+                <h2>Manage User Roles</h2>
+                Add/Remove Roles for User / @ViewBag.UserName.
+            </div>
+            <hr>
+            <div class="card-body">
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <div class="form-check m-1">
+                        <input type="hidden" asp-for="@Model[i].RoleId" />
+                        <input type="hidden" asp-for="@Model[i].RoleName" />
+                        <input asp-for="@Model[i].Selected" class="form-check-input" />
+                        <label class="form-check-label" asp-for="@Model[i].Selected">
+                            @Model[i].RoleName
+                        </label>
+                    </div>
+                }
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
+            <div class="card-footer">
+                <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+                <a asp-action="index" asp-route-id="@ViewBag.userId" class="btn btn-primary"
+                    style="width:auto">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

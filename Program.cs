@@ -9,6 +9,7 @@ builder.Services.AddDbContext<FPTBookIdentityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FPTBookIdentityDbContextConnection") ?? throw new InvalidOperationException("Connection string 'FPTBookIdentityDbContextConnection' not found.")));
 
 builder.Services.AddDefaultIdentity<BookUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<FPTBookIdentityDbContext>();
 
 // Add services to the container.
@@ -24,6 +25,13 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope()){
+    var services = scope.ServiceProvider;
+    var userManager = services.GetRequiredService<UserManager<BookUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    await ContextSeed.SeedRolesAsync(userManager, roleManager);
+    await ContextSeed.SeedSuperAdminAsync(userManager, roleManager);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
