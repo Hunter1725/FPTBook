@@ -108,6 +108,10 @@ namespace FPTBook.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+             [Phone]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
         }
 
 
@@ -174,6 +178,7 @@ namespace FPTBook.Areas.Identity.Pages.Account
                 user.Name = Input.Name;
                 user.DOB = Input.DOB;
                 user.Address = Input.Address;
+                user.PhoneNumber = Input.PhoneNumber;
                 return user;
             }
             catch

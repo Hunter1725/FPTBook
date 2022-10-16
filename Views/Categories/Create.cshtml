@@ -18,7 +18,12 @@
             <li class="active"><a href="/Categories/RequestCategory"><em class="fa fa-dashboard">&nbsp;</em>Request Category</a></li>
             <br><br><br><br><br><br><br><br>
 
-            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 </nav>

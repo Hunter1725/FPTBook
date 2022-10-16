@@ -1,4 +1,3 @@
-
 @model List<Microsoft.AspNetCore.Identity.IdentityRole>
 @{
     ViewData["Title"] = "Role Manager";
@@ -11,46 +10,51 @@
 
             <li class="active"><a href="/RoleManager/Index"><em class="fa fa-dashboard">&nbsp;</em> Add Role</a></li>
 
-            <li class=""><a href="/Categories/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Category</a></li> 
+            <li class=""><a href="/Categories/Index"><em class="fa fa-dashboard">&nbsp;</em> Manage Category</a></li>
 
             <li class=""><a href="/Admin/ReportDemo"><em class="fa fa-dashboard">&nbsp;</em> Report</a></li>
             <br><br><br><br><br><br><br><br>
 
-            <li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                    asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+                </form>
+            </li>
         </ul>
     </div>
 </nav>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-<h1>Role Manager</h1>
-<form method="post" asp-action="AddRole" asp-controller="RoleManager">
-    <hr>
-    <h4>Add new Role</h4>
-    
-    <div class="input-group">
-        <input name="roleName" class="form-control">
-        <span class="input-group-btn">
-            <button class="btn btn-info">Add New Role</button>
-        </span>
-    </div>
-</form>
-<hr>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Role</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var role in Model)
-        {
-            <tr>
-                <td>@role.Id</td>
-                <td>@role.Name</td>
-            </tr>
-        }
+    <h1>Role Manager</h1>
+    <form method="post" asp-action="AddRole" asp-controller="RoleManager">
+        <hr>
+        <h4>Add new Role</h4>
 
-    </tbody>
-</table>
+        <div class="input-group">
+            <input name="roleName" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-info">Add New Role</button>
+            </span>
+        </div>
+    </form>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.Id</td>
+                    <td>@role.Name</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
 </div>

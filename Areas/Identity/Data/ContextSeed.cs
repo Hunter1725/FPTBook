@@ -24,7 +24,9 @@ public static class ContextSeed
         Address = "Can Tho",
         DOB = new DateTime(2022-09-25) ,
         EmailConfirmed = true, 
+        PhoneNumber = "0909090909",
         PhoneNumberConfirmed = true 
+        
     };
     if (userManager.Users.All(u => u.Id != defaultUser.Id))
     {
