@@ -909,3 +909,12 @@ C:\Users\nguye\Desktop\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.FileProvide
 C:\Users\nguye\Desktop\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
 C:\Users\nguye\Desktop\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\nguye\Desktop\FPTBook\obj\Debug\net6.0\FPTBook.MvcApplicationPartsAssemblyInfo.cs
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.Identity.Core.dll
+C:\CodeApplicationDevelopment\FPTBook\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
+C:\CodeApplicationDevelopment\FPTBook\obj\Debug\net6.0\FPTBook.MvcApplicationPartsAssemblyInfo.cs

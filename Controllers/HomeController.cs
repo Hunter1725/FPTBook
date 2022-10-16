@@ -10,16 +10,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using FPTBook.Utils;
 using FPTBook.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace FPTBook.Controllers;
 
 public class HomeController : Controller
 {
     private readonly FPTBookIdentityDbContext _context;
+    private readonly UserManager<BookUser> _userManager;
 
-    public HomeController(FPTBookIdentityDbContext context)
+    public HomeController(FPTBookIdentityDbContext context, UserManager<BookUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     // public HomeController(ILogger<HomeController> logger)
@@ -91,10 +100,12 @@ public class HomeController : Controller
     // {
     //     return View();
     // }
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
     public IActionResult Cart()
     {
         return View();
     }
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
     public IActionResult Profile()
     {
         return View();
@@ -106,6 +117,7 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
     [HttpPost]
     public IActionResult AddBook(int id, string name, string poster, string author, decimal price, int quantity)
     {
@@ -124,13 +136,27 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult CheckOut()
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> CheckOut()
     {
         ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
+        ViewData["uid"] = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var users = await _userManager.Users.ToListAsync();
+        var userRolesViewModel = new List<UserRolesViewModel>();
+        foreach (BookUser user in users)
+        {
+            var thisViewModel = new UserRolesViewModel();
+            thisViewModel.UserId = user.Id;
+            thisViewModel.Name = user.Name;
+            thisViewModel.DOB = user.DOB;
+            thisViewModel.Address = user.Address;
+            userRolesViewModel.Add(thisViewModel);
+        }
+
         if (cart != null)
         {
             ViewData["myItems"] = cart.Items;
-            return View();
+            return View(userRolesViewModel);
         }
         else
         {
@@ -138,7 +164,8 @@ public class HomeController : Controller
         }
     }
 
-    public IActionResult PlaceOrder(decimal total, string fullname, string address, string phone)
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public IActionResult PlaceOrder(decimal total, string fullname, string address, string phone, string cusid)
     {
         ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
         Order myOrder = new Order();
@@ -146,6 +173,7 @@ public class HomeController : Controller
         myOrder.Total = total;
         myOrder.Fullname = fullname;
         myOrder.Address = address;
+        myOrder.CustomerID = cusid;
         myOrder.Phone = phone;
         myOrder.State = "Delivering";
         _context.Order.Add(myOrder);
@@ -183,5 +211,23 @@ public class HomeController : Controller
         HttpContext.Session.SetObject("cart", cart);
 
         return RedirectToAction("CheckOut", "Home");
+    }
+
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> Record()
+    {
+        var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        return _context.Order != null ?
+                    View(await _context.Order
+                    .Where(o => o.CustomerID == userID)
+                    .ToListAsync()) :
+                    Problem("Entity set 'FPTBookContext.Order'  is null.");
+    }
+    [Authorize(Roles = "Customer, StoreOwner, Admin")]
+    public async Task<IActionResult> OrderDetail(int id)
+    {
+        var fPTBookContext = _context.OrderItem.Where(e => e.Order.Id == id).Include(b => b.Book).Include(o => o.Order).Include(c => c.Book.Author);
+        return View(await fPTBookContext.ToListAsync());
     }
 }

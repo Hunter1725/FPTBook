@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTBook.Models;
 using FPTBook.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FPTBook.Controllers
 {
+     [Authorize(Roles = "StoreOwner, Admin")]
     public class OrderController : Controller
     {
         private readonly FPTBookIdentityDbContext _context;
@@ -56,7 +59,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderTime,Total,State,Fullname,Address,Phone")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,OrderTime,Total,State,CustomerID,Fullname,Address,Phone")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +91,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderTime,Total,State,Fullname,Address,Phone")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderTime,Total,State,CustomerID,Fullname,Address,Phone")] Order order)
         {
             if (id != order.Id)
             {

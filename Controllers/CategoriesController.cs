@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FPTBook.Models;
 using FPTBook.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FPTBook.Controllers
 {
@@ -20,6 +22,7 @@ namespace FPTBook.Controllers
         }
 
         // GET: Categories
+        [Authorize(Roles = "StoreOwner, Admin")]
         public async Task<IActionResult> Index()
         {
               return _context.Category != null ? 
@@ -27,12 +30,14 @@ namespace FPTBook.Controllers
                           Problem("Entity set 'FPTBookContext.Category'  is null.");
         }
 
+        [Authorize(Roles = "StoreOwner, Admin")]
         public async Task<IActionResult> RequestCategory()
         {
               return View(await _context.Category.ToListAsync());
         }
 
         // GET: Categories/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Category == null)
@@ -51,6 +56,7 @@ namespace FPTBook.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -73,6 +79,7 @@ namespace FPTBook.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Category == null)
@@ -124,6 +131,7 @@ namespace FPTBook.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Category == null)

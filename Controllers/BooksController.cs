@@ -9,9 +9,12 @@ using Microsoft.AspNetCore.Hosting;
 using FPTBook.Models;
 using FPTBook.Utils;
 using FPTBook.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FPTBook.Controllers
 {
+    [Authorize(Roles = "StoreOwner, Admin")]
     public class BooksController : Controller
     {
         private readonly FPTBookIdentityDbContext _context;

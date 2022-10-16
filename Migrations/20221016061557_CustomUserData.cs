@@ -88,6 +88,7 @@ namespace FPTBook.Migrations
                     OrderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)

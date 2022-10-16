@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPTBook.Migrations
 {
     [DbContext(typeof(FPTBookIdentityDbContext))]
-    [Migration("20221015035019_CustomUserData")]
+    [Migration("20221016061557_CustomUserData")]
     partial class CustomUserData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,6 +192,10 @@ namespace FPTBook.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CustomerID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

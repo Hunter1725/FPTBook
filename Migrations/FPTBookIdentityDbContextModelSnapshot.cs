@@ -193,6 +193,10 @@ namespace FPTBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CustomerID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Fullname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

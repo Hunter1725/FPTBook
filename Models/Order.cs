@@ -7,6 +7,7 @@ public class Order
         public DateTime OrderTime { get; set; }
         public decimal Total { get; set; }
         public string State{ get; set; }
+        public string CustomerID { get; set; }
         public string Fullname { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }

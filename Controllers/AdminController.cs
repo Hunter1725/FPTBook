@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using OfficeOpenXml;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace FPTBook.Controllers;
-
+[Authorize(Roles = "Admin")]
 public class AdminController : Controller
 {
     // private readonly ILogger<AdminController> _logger;

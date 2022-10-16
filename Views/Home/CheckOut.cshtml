@@ -1,8 +1,11 @@
 @using FPTBook.Utils
+@using FPTBook.Models;
+@model List<FPTBook.Models.UserRolesViewModel>
 @{
     ViewData["Title"] = "Shopping Cart";
     List<CartItem> myItems = (List<CartItem>)ViewData["myItems"];
     decimal total = 0;
+    string cusid = ViewData["uid"].ToString();
 }
 <section class="bg0 p-t-100 p-b-80">
     <div class="container">
@@ -92,38 +95,45 @@
                                 </div>
                                 <div class="card shadow-2-strong" style="border-radius: 1rem;">
                                     <div class="card-body p-5">
+                                        @foreach (var user in Model)
+                                        {
+                                            <h3 class="mb-4">Payment</h3>
+                                            <form asp-action="PlaceOrder" method="post">
+                                                <div class="form-outline mb-4" hidden>
+                                                    <label class="form-label" for="cusid"><strong>CusID</strong></label>
+                                                    <input type="text" name="cusid" class="form-control form-control-lg"
+                                                    value="@cusid" />
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="fullname"><strong>Fullname</strong></label>
+                                                    <input type="text" name="fullname" class="form-control form-control-lg"
+                                                    value="@user.Name" />
+                                                </div>
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="address"><strong>Address</strong></label>
+                                                    <input type="text" name="address"
+                                                    class="form-control form-control-lg" value="@user.Address"/>
+                                                </div>
 
-                                        <h3 class="mb-4">Payment</h3>
-                                        <form asp-action="PlaceOrder" method="post">
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label"
-                                                    for="fullname"><strong>Fullname</strong></label>
-                                                <input type="text" name="fullname"
-                                                    class="form-control form-control-lg" />
-                                            </div>
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="address"><strong>Address</strong></label>
-                                                <input type="text" name="address"
-                                                    class="form-control form-control-lg" />
-                                            </div>
-
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="phone"><strong>Phone</strong></label>
-                                                <input type="text" name="phone" class="form-control form-control-lg" />
-                                            </div>
-                                            <div class="row">
-                                                <input type="hidden" name="total" value="@total" />
-                                                <input
+                                                <div class="form-outline mb-4">
+                                                    <label class="form-label" for="phone"><strong>Phone</strong></label>
+                                                    <input type="text" name="phone" class="form-control form-control-lg" />
+                                                </div>
+                                                <div class="row">
+                                                    <input type="hidden" name="total" value="@total" />
+                                                    <input
                                                     class="flex-c-m stext-101 cl0 m-r-20 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer"
                                                     type="submit" value="Order" class="btn btn-primary" />
 
-                                                <a asp-action="Index"
+                                                    <a asp-action="Index"
                                                     class="flex-c-m stext-101 cl0 size-101 bg3 bor14 hov-btn3 p-lr-5 trans-04 pointer">
-                                                    Cancel
-                                                </a>
-                                            </div>
-                                        </form>
+                                                        Cancel
+                                                    </a>
+                                                </div>
+                                            </form>
+                                        }
                                     </div>
+
                                 </div>
                             </div>
                         </div>
