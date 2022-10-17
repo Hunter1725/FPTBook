@@ -148,7 +148,7 @@ public class HomeController : Controller
             var thisViewModel = new UserRolesViewModel();
             thisViewModel.UserId = user.Id;
             thisViewModel.Name = user.Name;
-            thisViewModel.DOB = user.DOB;
+            thisViewModel.PhoneNumber = user.PhoneNumber;
             thisViewModel.Address = user.Address;
             userRolesViewModel.Add(thisViewModel);
         }
