@@ -79,7 +79,8 @@
 							</li>
 							@foreach (var item in Model.Select(x => x.Author).Distinct())
 							{
-								string fillter = "." + item.Name;
+								string author = "." + item.Name;
+								string fillter = String.Concat(author.Where(c => !Char.IsWhiteSpace(c)));
 								<li class="p-b-6">
 									<button class="filter-link stext-106 trans-04" data-filter="@fillter">
 										@Html.DisplayFor(modelItem => item.Name)
@@ -102,7 +103,8 @@
 							</li>
 							@foreach (var item in Model.Select(x => x.Publisher).Distinct())
 							{
-								string fillter = "." + item.Name;
+								string publisher = "." + item.Name;
+								string fillter = String.Concat(publisher.Where(c => !Char.IsWhiteSpace(c)));
 								<li class="p-b-6">
 									<button class="filter-link stext-106 trans-04" data-filter="@fillter">
 										@Html.DisplayFor(modelItem => item.Name)
@@ -133,8 +135,8 @@
 			@foreach (var item in Model)
 			{
 				string fillterCategory = item.Category.Name;
-				string fillterAuthor = item.Author.Name;
-				string fillterPublisher = item.Publisher.Name;
+				string fillterAuthor = String.Concat(item.Author.Name.Where(c => !Char.IsWhiteSpace(c)));
+				string fillterPublisher = String.Concat(item.Publisher.Name.Where(c => !Char.IsWhiteSpace(c)));
 				<div
 				class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @fillterCategory @fillterAuthor @fillterPublisher">
 					<!-- Block2 -->
