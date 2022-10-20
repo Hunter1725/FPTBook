@@ -141,7 +141,7 @@ public class HomeController : Controller
     {
         ShoppingCart cart = (ShoppingCart)HttpContext.Session.GetObject<ShoppingCart>("cart");
         ViewData["uid"] = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var users = await _userManager.Users.ToListAsync();
+        var users = await _userManager.Users.Where(u => u.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToListAsync();
         var userRolesViewModel = new List<UserRolesViewModel>();
         foreach (BookUser user in users)
         {
@@ -173,7 +173,7 @@ public class HomeController : Controller
         myOrder.Total = total;
         myOrder.Fullname = fullname;
         myOrder.Address = address;
-        myOrder.CustomerID = cusid;
+        myOrder.UserID = cusid;
         myOrder.Phone = phone;
         myOrder.State = "Delivering";
         _context.Order.Add(myOrder);
@@ -220,7 +220,7 @@ public class HomeController : Controller
 
         return _context.Order != null ?
                     View(await _context.Order
-                    .Where(o => o.CustomerID == userID)
+                    .Where(o => o.UserID == userID)
                     .ToListAsync()) :
                     Problem("Entity set 'FPTBookContext.Order'  is null.");
     }

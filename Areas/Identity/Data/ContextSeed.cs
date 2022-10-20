@@ -33,7 +33,7 @@ public static class ContextSeed
         var user = await userManager.FindByEmailAsync(defaultUser.Email);
         if(user==null)
         {
-            await userManager.CreateAsync(defaultUser, "123Pa$$word");
+            await userManager.CreateAsync(defaultUser, "Admin@123");
             await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
             await userManager.AddToRoleAsync(defaultUser, Enums.Roles.StoreOwner.ToString());
             await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Customer.ToString());

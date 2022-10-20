@@ -193,9 +193,8 @@ namespace FPTBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CustomerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("BookUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Fullname")
                         .IsRequired()
@@ -215,7 +214,13 @@ namespace FPTBook.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BookUserId");
 
                     b.ToTable("Order");
                 });
@@ -427,6 +432,15 @@ namespace FPTBook.Migrations
                     b.Navigation("Publisher");
                 });
 
+            modelBuilder.Entity("FPTBook.Models.Order", b =>
+                {
+                    b.HasOne("FPTBook.Areas.Identity.Data.BookUser", "BookUser")
+                        .WithMany("Order")
+                        .HasForeignKey("BookUserId");
+
+                    b.Navigation("BookUser");
+                });
+
             modelBuilder.Entity("FPTBook.Models.OrderItem", b =>
                 {
                     b.HasOne("FPTBook.Models.Book", "Book")
@@ -495,6 +509,11 @@ namespace FPTBook.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FPTBook.Areas.Identity.Data.BookUser", b =>
+                {
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("FPTBook.Models.Author", b =>
