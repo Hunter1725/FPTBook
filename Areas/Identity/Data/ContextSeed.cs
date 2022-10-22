@@ -20,7 +20,7 @@ public static class ContextSeed
     { 
         UserName = "Admin@gmail.com", 
         Email = "Admin@gmail.com",
-        Name = "Le Hoang Du",
+        Name = "Nguyen Ngoc Hai",
         Address = "Can Tho",
         DOB = new DateTime(2022-09-25) ,
         EmailConfirmed = true, 

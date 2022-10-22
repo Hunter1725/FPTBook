@@ -82,6 +82,7 @@ namespace FPTBook.Areas.Identity.Pages.Account.Manage
             {
                 Name = user.Name,
                 Address = user.Address,
+                DOB = user.DOB,
                 PhoneNumber = phoneNumber
             };
         }
