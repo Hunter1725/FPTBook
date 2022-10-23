@@ -3,6 +3,7 @@
 
 @inject SignInManager<BookUser> SignInManager
 @inject UserManager<BookUser> UserManager
+@inject RoleManager<IdentityRole> roleManager
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,9 +42,12 @@
 	<link rel="stylesheet" type="text/css" href="~/css/main.css">
 	<!--===============================================================================================-->
 	<!--Google Icon-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body class="animsition">
@@ -74,17 +78,65 @@
 							<li>
 								<a href="/home/about">About us</a>
 							</li>
-
-
-
 						</ul>
 					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<ul class="main-menu">
-							@if (SignInManager.IsSignedIn(User))
+						@if (SignInManager.IsSignedIn(User))
+						{
+							@if (this.User.IsInRole("Admin") && !this.User.IsInRole("StoreOwner"))
 							{
+								<li class="nav-item">
+									<a id="manage" class="nav-link text-dark" asp-area="Identity"
+								asp-page="/Account/Manage/Index" title="Manage">Hello
+										@UserManager.GetUserName(User)!</a>
+								</li>
+								<li class="nav-item">
+									<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+								asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+									</form>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" href="~/Admin/index">Admin Page</a>
+								</li>
+							}
+							else if (this.User.IsInRole("StoreOwner") && !this.User.IsInRole("Admin"))
+							{
+								<li class="nav-item">
+									<a id="manage" class="nav-link text-dark" asp-area="Identity"
+								asp-page="/Account/Manage/Index" title="Manage">Hello
+										@UserManager.GetUserName(User)!</a>
+								</li>
+								<li class="nav-item">
+									<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+								asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+									</form>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" href="~/StoreOwner/index">Store Owner Page</a>
+								</li>
+							}
+							else if (this.User.IsInRole("StoreOwner") && !this.User.IsInRole("Admin"))
+							{
+								<li class="nav-item">
+									<a id="manage" class="nav-link text-dark" asp-area="Identity"
+								asp-page="/Account/Manage/Index" title="Manage">Hello
+										@UserManager.GetUserName(User)!</a>
+								</li>
+								<li class="nav-item">
+									<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+								asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+										<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+									</form>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" href="~/StoreOwner/index">Store Owner Page</a>
+								</li>
+							}
+							else{
 								<li class="nav-item">
 									<a id="manage" class="nav-link text-dark" asp-area="Identity"
 									asp-page="/Account/Manage/Index" title="Manage">Hello
@@ -100,18 +152,19 @@
 									</form>
 								</li>
 							}
-							else
-							{
-								<li class="nav-item">
-									<a class="nav-link text-dark" id="register" asp-area="Identity"
-									asp-page="/Account/Register">Register</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link text-dark" id="login" asp-area="Identity"
-									asp-page="/Account/Login">Login</a>
-								</li>
-							}
-						</ul>
+
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" id="register" asp-area="Identity"
+								asp-page="/Account/Register">Register</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link text-dark" id="login" asp-area="Identity"
+								asp-page="/Account/Login">Login</a>
+							</li>
+						}
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-cart">
 							<a href="/home/checkout"><i class="zmdi zmdi-shopping-cart"></i></a>
 						</div>
@@ -159,35 +212,55 @@
 					<a href="/home/about">About us</a>
 				</li>
 
-				@if (SignInManager.IsSignedIn(User))
-				{
+				@* @if (SignInManager.IsSignedIn(User))
+					{
+					@if (this.User.IsInRole("Admin") && !this.User.IsInRole("StoreOwner"))
+					{
 					<li class="nav-item">
-						<a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
-						title="Manage">Hello
-							@UserManager.GetUserName(User)!</a>
+					<a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+					title="Manage">Hello
+					@UserManager.GetUserName(User)!</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-dark" href="/home/record">Recorded Order</a>
+					<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+					asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+					<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+					</form>
 					</li>
 					<li class="nav-item">
-						<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
-						asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-							<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
-						</form>
+					@* <a class="" href="/Admin/index">Admin Page</a>
+					<a id="" class="nav-link text-dark" asp-controller = "StoreOwner" asp-action ="Index">Admin Page</a>
 					</li>
-				}
-				else
-				{
+					}
+					else if(this.User.IsInRole("StoreOwner") && !this.User.IsInRole("Admin"))
+					{
 					<li class="nav-item">
-						<a class="nav-link text-dark" id="register" asp-area="Identity"
-						asp-page="/Account/Register">Register</a>
+					<a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index"
+					title="Manage">Hello
+					@UserManager.GetUserName(User)!</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+					<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+					asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+					<button id="logout" type="submit" class="nnav-link text-dark">Logout</button>
+					</form>
 					</li>
-				}
+					<li class="nav-item">
+					<a class="nav-link text-dark" href="~/StoreOwner/index">Store Owner Page</a>
+					</li>
+					}
+					}
+					else
+					{
+					<li class="nav-item">
+					<a class="nav-link text-dark" id="register" asp-area="Identity"
+					asp-page="/Account/Register">Register</a>
+					</li>
+					<li class="nav-item">
+					<a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+					</li>
+					}*@
 			</ul>
-
 		</div>
 
 		<!-- Modal Search -->

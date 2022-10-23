@@ -16,11 +16,11 @@ public static class ContextSeed
     public static async Task SeedSuperAdminAsync(UserManager<BookUser> userManager, RoleManager<IdentityRole> roleManager)
 {
     //Seed Default User
-    var defaultUser = new BookUser 
+    var defaultUserAdmin = new BookUser 
     { 
         UserName = "Admin@gmail.com", 
         Email = "Admin@gmail.com",
-        Name = "Le Hoang Du",
+        Name = "NGUYEN NGOC HAI",
         Address = "Can Tho",
         DOB = new DateTime(2022-09-25) ,
         EmailConfirmed = true, 
@@ -28,15 +28,36 @@ public static class ContextSeed
         PhoneNumberConfirmed = true 
         
     };
-    if (userManager.Users.All(u => u.Id != defaultUser.Id))
+    if (userManager.Users.All(u => u.Id != defaultUserAdmin.Id))
     {
-        var user = await userManager.FindByEmailAsync(defaultUser.Email);
+        var user = await userManager.FindByEmailAsync(defaultUserAdmin.Email);
         if(user==null)
         {
-            await userManager.CreateAsync(defaultUser, "Admin@123");
-            await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Admin.ToString());
-            await userManager.AddToRoleAsync(defaultUser, Enums.Roles.StoreOwner.ToString());
-            await userManager.AddToRoleAsync(defaultUser, Enums.Roles.Customer.ToString());
+            await userManager.CreateAsync(defaultUserAdmin, "Admin@123");
+            await userManager.AddToRoleAsync(defaultUserAdmin, Enums.Roles.Admin.ToString());
+        }
+    }
+
+    //Seed Default User
+    var defaultUserStoreOwner = new BookUser 
+    { 
+        UserName = "StoreOwner@gmail.com", 
+        Email = "StoreOwner@gmail.com",
+        Name = "Le Hoang Du",
+        Address = "Can Tho",
+        DOB = new DateTime(2002-09-15) ,
+        EmailConfirmed = true, 
+        PhoneNumber = "0909090909",
+        PhoneNumberConfirmed = true 
+        
+    };
+    if (userManager.Users.All(u => u.Id != defaultUserStoreOwner.Id))
+    {
+        var user = await userManager.FindByEmailAsync(defaultUserStoreOwner.Email);
+        if(user==null)
+        {
+            await userManager.CreateAsync(defaultUserStoreOwner, "Admin@123");
+            await userManager.AddToRoleAsync(defaultUserStoreOwner, Enums.Roles.StoreOwner.ToString());
         }
     }
 }
