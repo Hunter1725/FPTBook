@@ -80,7 +80,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,AuthorID,PublisherID,Poster,CategoryID,ReleaseDate,Price")] Book book, IFormFile myfile)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,AuthorID,PublisherID,Poster,CategoryID,ReleaseDate,Price")] Book book, IFormFile myfile, string Title)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +93,9 @@ namespace FPTBook.Controllers
                 }
                 book.Poster = filename;
                 _context.Add(book);
+                if(_context.Book.Where(a => a.Title == Title).ToList().Count != 0){
+                     return View(book);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

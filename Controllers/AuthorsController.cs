@@ -59,11 +59,14 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Author author)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Author author,string Name)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(author);
+                if(_context.Author.Where(a => a.Name == Name).ToList().Count != 0){
+                     return View(author);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -91,7 +94,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Author author)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Author author,string Name)
         {
             if (id != author.Id)
             {
@@ -103,6 +106,9 @@ namespace FPTBook.Controllers
                 try
                 {
                     _context.Update(author);
+                    if(_context.Author.Where(a => a.Name == Name).ToList().Count != 0){
+                     return View(author);
+                }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

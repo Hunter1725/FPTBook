@@ -59,11 +59,14 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Publisher publisher)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Publisher publisher, string Name)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(publisher);
+                if(_context.Publisher.Where(a => a.Name == Name).ToList().Count != 0){
+                     return View(publisher);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

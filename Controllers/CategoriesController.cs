@@ -68,11 +68,14 @@ namespace FPTBook.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "StoreOwner, Admin")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Status")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Name,Status")] Category category, string Name)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(category);
+                if(_context.Category.Where(a => a.Name == Name).ToList().Count != 0){
+                     return View(category);
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(RequestCategory));
             }
