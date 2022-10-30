@@ -91,7 +91,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderTime,Total,State,CustomerID,Fullname,Address,Phone")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,OrderTime,Total,State,Fullname,UserID,Address,Phone")] Order order)
         {
             if (id != order.Id)
             {
@@ -99,7 +99,7 @@ namespace FPTBook.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            {  
                 try
                 {
                     _context.Update(order);

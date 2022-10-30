@@ -74,6 +74,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Phone)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
     </dl>
 </div>
     <hr>
@@ -92,11 +98,11 @@
                     <input asp-for="Total" class="form-control" />
                     <span asp-validation-for="Total" class="text-danger"></span>
                 </div> 
-                @* <div class="form-group" >
-                    <label asp-for="State" class="control-label"></label>
-                    <input asp-for="State" class="form-control" />
-                    <span asp-validation-for="State" class="text-danger"></span>
-                </div> *@
+                <div class="form-group" hidden>
+                    <label asp-for="UserID" class="control-label"></label>
+                    <input asp-for="UserID" class="form-control" />
+                    <span asp-validation-for="UserID" class="text-danger"></span>
+                </div>
                 <div class="form-group" hidden>
                     <label asp-for="UserID" class="control-label"></label>
                     <input asp-for="UserID" class="form-control" />

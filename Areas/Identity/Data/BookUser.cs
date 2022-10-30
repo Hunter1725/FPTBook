@@ -20,7 +20,7 @@ public class BookUser : IdentityUser
     public string  Address { get; set; }
 
     [PersonalData]
-    public virtual ICollection<Order>? Order { get; set; }
+    public ICollection<Order>? Order { get; set; }
 
 }
 

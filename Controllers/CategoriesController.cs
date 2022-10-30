@@ -56,7 +56,7 @@ namespace FPTBook.Controllers
         }
 
         // GET: Categories/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "StoreOwner, Admin")]
         public IActionResult Create()
         {
             return View();
@@ -67,6 +67,7 @@ namespace FPTBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "StoreOwner, Admin")]
         public async Task<IActionResult> Create([Bind("Id,Name,Status")] Category category)
         {
             if (ModelState.IsValid)

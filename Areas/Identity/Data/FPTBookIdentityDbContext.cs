@@ -20,6 +20,9 @@ public class FPTBookIdentityDbContext : IdentityDbContext<BookUser>
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.Entity<FPTBook.Models.Book>()
              .Property(p => p.Price).HasColumnType("decimal(18,4)");
+        builder.Entity<FPTBook.Models.Author>()
+             .HasIndex(p => p.Name).IsUnique();
+
     }
 
     public DbSet<FPTBook.Models.Category> Category { get; set; } = default!;

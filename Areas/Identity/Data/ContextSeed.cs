@@ -22,7 +22,7 @@ public static class ContextSeed
         Email = "Admin@gmail.com",
         Name = "NGUYEN NGOC HAI",
         Address = "Can Tho",
-        DOB = new DateTime(2022-09-25) ,
+        DOB = new DateTime(2008, 3, 9, 16, 5, 7, 123),
         EmailConfirmed = true, 
         PhoneNumber = "0909090909",
         PhoneNumberConfirmed = true 
@@ -45,7 +45,7 @@ public static class ContextSeed
         Email = "StoreOwner@gmail.com",
         Name = "Le Hoang Du",
         Address = "Can Tho",
-        DOB = new DateTime(2002-09-15) ,
+        DOB = new DateTime(2002, 3, 11, 21, 5, 8, 123),
         EmailConfirmed = true, 
         PhoneNumber = "0909090909",
         PhoneNumberConfirmed = true 
